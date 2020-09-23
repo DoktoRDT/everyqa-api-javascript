@@ -20,7 +20,7 @@ describe('Action Api', () => {
 
   describe('"addResultToTest"', () => {
 
-    it('Should return correct action if ts-test id is correct', async () => {
+    it('Should return correct action if test id is correct', async () => {
       const { data } = await actionApi.addResultToTest(PROJECT_ID, RUN_ID, TEST_ID, {
         notes: 'notes',
         status_id: 3,
@@ -93,7 +93,7 @@ describe('Action Api', () => {
         .catch(handleError(401))
     })
 
-    it('Should throw 401 if user has no access to ts-test', async () => {
+    it('Should throw 401 if user has no access to test', async () => {
       await actionApi.addResultToTest(PROJECT_ID, RUN_ID, WRONG_TEST_ID, {
         notes: 'notes',
         status_id: 3,

@@ -22,7 +22,7 @@ describe('Tests Api', () => {
       runId = id;
     })
 
-    it('Should return correct ts-test if case id is correct', async () => {
+    it('Should return correct test if case id is correct', async () => {
       const [ run ] = await testsApi.addTests(PROJECT_ID, runId, { case_ids: [ CASE_ID ] });
       expect(run.case_id).eq(CASE_ID);
       expect(run.project_id).eq(PROJECT_ID);

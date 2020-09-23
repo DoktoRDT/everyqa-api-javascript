@@ -11,7 +11,7 @@ import {
 } from '../constants';
 import { assertFalse, handleError } from '../handlers';
 
-const testRunName = 'ts-test run';
+const testRunName = 'test run';
 
 async function restoreTestRun() {
   await runsApi.updateRun(PROJECT_ID, RUN_ID, {
@@ -73,7 +73,7 @@ describe('Runs Api', () => {
     afterEach(restoreTestRun);
 
     it('Should return correct run if body is correct', async () => {
-      const name = 'updated ts-test run';
+      const name = 'updated test run';
       const assign_to = ANOTHER_ASSIGNEE;
       const { data, status } = await runsApi.updateRun(PROJECT_ID, RUN_ID, {
         name,
@@ -90,7 +90,7 @@ describe('Runs Api', () => {
     })
 
     it('Should throw 404 if projectId is incorrect', async () => {
-      const name = 'updated ts-test run';
+      const name = 'updated test run';
       const assign_to = ANOTHER_ASSIGNEE;
       await runsApi.updateRun('PROJECT_ID', RUN_ID, {
         name,
@@ -103,7 +103,7 @@ describe('Runs Api', () => {
     })
 
     it('Should throw 401 if user has no access to project', async () => {
-      const name = 'updated ts-test run';
+      const name = 'updated test run';
       const assign_to = ANOTHER_ASSIGNEE;
       await runsApi.updateRun(WRONG_PROJECT_ID, RUN_ID, {
         name,
@@ -119,7 +119,7 @@ describe('Runs Api', () => {
 
   describe('"getRunList"', () => {
 
-    it('Should return array contains run with id = 150', async () => {
+    it(`Should return array contains run with id = ${RUN_ID}`, async () => {
       const { data, status } = await runsApi.getRunList(PROJECT_ID);
       const run = data.find(r => r.id === RUN_ID);
       expect(status).eq(200);
@@ -147,7 +147,7 @@ describe('Runs Api', () => {
 
   describe('"getRun"', () => {
 
-    it('Should return run with id = 150', async () => {
+    it(`Should return run with id = ${RUN_ID}`, async () => {
       const { data, status } = await runsApi.getRun(PROJECT_ID, RUN_ID);
       expect(status).eq(200);
       expect(data.id).eq(RUN_ID);
