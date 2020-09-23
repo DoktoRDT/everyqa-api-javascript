@@ -14,6 +14,7 @@ export const WRONG_SPRINT_ID = 105;
 export const ASSIGNEE = 'eaaf7b28-bdb6-4f6f-b41d-0933bb99f2b8';
 export const ANOTHER_ASSIGNEE = '2456dc2a-ae57-49b9-86ff-d17062869b35';
 export const RUN_ID = 150;
+export const CLOSED_RUN_ID = 231;
 export const WRONG_RUN_ID = 176;
 export const TEST_ID = 4682;
 export const WRONG_TEST_ID = 4683;

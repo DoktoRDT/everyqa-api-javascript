@@ -5,6 +5,7 @@ import {
   CASE_ID_3,
   CASE_ID_4,
   CASE_ID_5,
+  CLOSED_RUN_ID,
   defaultConfig,
   PROJECT_ID,
   SPRINT_ID,
@@ -42,6 +43,12 @@ describe('Tests Api', () => {
       expect(test.estimate).eq(0);
       expect(test.preconditions).eq('мы проверим новый механизировано бла-бла \nhttps://yandex.ru');
       expect(test.steps.length).eq(2);
+    })
+
+    it('Should throw 400 if test run is closed', async () => {
+      await testsApi.addTests(PROJECT_ID, CLOSED_RUN_ID, { case_ids: [ CASE_ID_2 ] })
+        .then(assertFalse)
+        .catch(handleError(400))
     })
 
     it('Should throw 404 if projectId is incorrect', async () => {

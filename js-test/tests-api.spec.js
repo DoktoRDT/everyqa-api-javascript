@@ -1,4 +1,4 @@
-const { API_KEY, PROJECT_ID, SPRINT_ID, WRONG_PROJECT_ID, CASE_ID, CASE_ID_2, CASE_ID_3, CASE_ID_4, CASE_ID_5, WRONG_CASE_ID } = require('../constants');
+const { API_KEY, PROJECT_ID, SPRINT_ID, WRONG_PROJECT_ID, CLOSED_RUN_ID, CASE_ID, CASE_ID_2, CASE_ID_3, CASE_ID_4, CASE_ID_5, WRONG_CASE_ID } = require('../constants');
 const PublicApi = require('everyqa-api');
 const { expect } = require('chai');
 const { assertFalse, handleError } = require('../handlers')
@@ -31,6 +31,12 @@ describe('Tests Api', () => {
       expect(run.estimate).eq(0);
       expect(run.preconditions).eq('мы проверим новый механизировано бла-бла \nhttps://yandex.ru');
       expect(run.steps.length).eq(2);
+    })
+
+    it('Should throw 400 if test run is closed', async () => {
+      await testsApi.addTests(PROJECT_ID, CLOSED_RUN_ID, { case_ids: [ CASE_ID_2 ] })
+        .then(assertFalse)
+        .catch(handleError(400))
     })
 
     it('Should throw 404 if projectId is incorrect', async () => {
